@@ -1,19 +1,21 @@
 <div align="center">
 
 <p align="right">
-  <strong>English</strong> | <a href="README_zh.md">中文</a>
+  <strong>English</strong> | <a href="./README_zh.md">中文</a>
 </p>
 
-<h1>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h1>
+# 🧠 RationaleRM
+
+<h2>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h2>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/XXXX.XXXXX"><img src="https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg" alt="arXiv"></a>
-  <a href="https://huggingface.co/datasets/YOUR_ORG/HelpSteer3-Atomic"><img src="https://img.shields.io/badge/🤗%20Dataset-HelpSteer3--Atomic-yellow" alt="Dataset"></a>
-  <a href="#-citation"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg" alt="License"></a>
+  <a href="https://arxiv.org/abs/2602.04649"><img src="https://img.shields.io/badge/arXiv-2602.04649-b31b1b.svg" alt="arXiv"></a>
+  <a href="https://huggingface.co/datasets/Qwen/RationaleRM"><img src="https://img.shields.io/badge/🤗%20Dataset-RationaleRM-yellow" alt="Dataset"></a>
+  <a href="https://creativecommons.org/licenses/by/4.0/legalcode.en"><img src="https://img.shields.io/badge/License-CC%20BY%204.0-green.svg" alt="License"></a>
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/XXXX.XXXXX"><strong>[📄 Paper]</strong></a> •
+  <a href="https://arxiv.org/abs/2602.04649"><strong>[📄 Paper]</strong></a> •
   <a href="#-dataset"><strong>[🤗 Dataset]</strong></a> •
   <a href="#-citation"><strong>[📜 Citation]</strong></a>
 </p>
@@ -31,9 +33,9 @@
 
 ## 📖 Overview
 
-**MetaJudge** is a framework for evaluating the consistency between reward model reasoning processes and human judgments. We discover that generative reward models (GenRMs) and LLM-as-a-Judge exhibit **Deceptive Alignment** issues — models may reach the same final result as humans through superficial or even incorrect reasoning processes.
+**RationaleRM** is a research project that investigates how to align not just the *outcomes* but also the *reasoning processes* of reward models with human judgments. We discover that generative reward models (GenRMs) and LLM-as-a-Judge exhibit **Deceptive Alignment** issues — models may reach the same final result as humans through superficial or even incorrect reasoning processes.
 
-We propose the **Rationale Consistency** metric, which decomposes human and model rationales into atomic units, then performs strict one-to-one semantic matching to precisely quantify the alignment between model reasoning and human judgments.
+To address this, we propose the **Rationale Consistency** metric, which measures the alignment between the model's reasoning process and human judgment rationales. We also design the **MetaJudge** framework to compute this metric: it decomposes human and model rationales into atomic units, then performs strict one-to-one semantic matching to precisely quantify their consistency.
 
 **Core Contributions:**
 
@@ -226,7 +228,8 @@ python metajudge_analysis.py \
 ```
 
 Output example:
-```
+
+```text
 ====================================================================================================
 Results Sorted by RECALL
 ====================================================================================================
@@ -288,7 +291,7 @@ If you find this work helpful, please cite our paper:
 @article{wang2026outcome,
   title={Outcome Accuracy is Not Enough: Aligning the Reasoning Process of Reward Models},
   author={Wang, Binghai and Liu, Yantao and Liu, Yuxuan and Tang, Tianyi and Wang, Shenzhi and Gao, Chang and Zheng, Chujie and Zhang, Yichang and Yu, Le and Liu, Shixuan and Gui, Tao and Zhang, Qi and Huang, Xuanjing and Yu, Bowen and Huang, Fei and Lin, Junyang},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  journal={arXiv preprint arXiv:2602.04649},
   year={2026}
 }
 ```

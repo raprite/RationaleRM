@@ -1,19 +1,21 @@
 <div align="center">
 
 <p align="right">
-  <a href="README.md">English</a> | <strong>中文</strong>
+  <a href="./README.md">English</a> | <strong>中文</strong>
 </p>
 
-<h1>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h1>
+# 🧠 RationaleRM
+
+<h2>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h2>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/XXXX.XXXXX"><img src="https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg" alt="arXiv"></a>
-  <a href="https://huggingface.co/datasets/YOUR_ORG/HelpSteer3-Atomic"><img src="https://img.shields.io/badge/🤗%20Dataset-HelpSteer3--Atomic-yellow" alt="Dataset"></a>
-  <a href="#-引用"><img src="https://img.shields.io/badge/License-Apache%202.0-green.svg" alt="License"></a>
+  <a href="https://arxiv.org/abs/2602.04649"><img src="https://img.shields.io/badge/arXiv-2602.04649-b31b1b.svg" alt="arXiv"></a>
+  <a href="https://huggingface.co/datasets/Qwen/RationaleRM"><img src="https://img.shields.io/badge/🤗%20Dataset-RationaleRM-yellow" alt="Dataset"></a>
+  <a href="https://creativecommons.org/licenses/by/4.0/legalcode.en"><img src="https://img.shields.io/badge/License-CC%20BY%204.0-green.svg" alt="License"></a>
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/XXXX.XXXXX"><strong>[📄 论文]</strong></a> •
+  <a href="https://arxiv.org/abs/2602.04649"><strong>[📄 论文]</strong></a> •
   <a href="#-数据集"><strong>[🤗 数据集]</strong></a> •
   <a href="#-引用"><strong>[📜 引用]</strong></a>
 </p>
@@ -31,9 +33,9 @@
 
 ## 📖 项目简介
 
-**MetaJudge** 是一个用于评估奖励模型推理过程与人类判断一致性的框架。我们发现，生成式奖励模型（GenRMs）和 LLM-as-a-Judge 存在**欺骗性对齐（Deceptive Alignment）**问题——模型可能通过肤浅甚至错误的判断过程达到与人类相同的最终结果。
+**RationaleRM** 是一个研究项目，旨在探索如何将奖励模型的*推理过程*（而不仅仅是*结果*）与人类判断对齐。我们发现，生成式奖励模型（GenRMs）和 LLM-as-a-Judge 存在**欺骗性对齐（Deceptive Alignment）**问题——模型可能通过肤浅甚至错误的判断过程达到与人类相同的最终结果。
 
-我们提出了 **理由一致性（Rationale Consistency）** 指标，通过将人类和模型的判别理由分解为原子理由，然后进行严格的一一语义匹配，精确量化模型推理过程与人类判断的对齐程度。
+为此，我们提出了 **理由一致性（Rationale Consistency）** 指标，用于衡量模型的推理过程与人类判断依据之间的对齐程度。同时，我们设计了 **MetaJudge** 框架来计算该指标：它将人类和模型的判别理由分解为原子单元，通过严格的一一语义匹配，精确量化两者的一致性。
 
 **核心贡献：**
 
@@ -226,7 +228,8 @@ python metajudge_analysis.py \
 ```
 
 输出示例：
-```
+
+```text
 ====================================================================================================
 按 RECALL 排序的结果
 ====================================================================================================
@@ -288,7 +291,7 @@ MetaJudge 计算以下指标：
 @article{wang2026outcome,
   title={Outcome Accuracy is Not Enough: Aligning the Reasoning Process of Reward Models},
   author={Wang, Binghai and Liu, Yantao and Liu, Yuxuan and Tang, Tianyi and Wang, Shenzhi and Gao, Chang and Zheng, Chujie and Zhang, Yichang and Yu, Le and Liu, Shixuan and Gui, Tao and Zhang, Qi and Huang, Xuanjing and Yu, Bowen and Huang, Fei and Lin, Junyang},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  journal={arXiv preprint arXiv:2602.04649},
   year={2026}
 }
 ```
