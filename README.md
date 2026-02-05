@@ -1,5 +1,9 @@
 <div align="center">
 
+<p align="right">
+  <strong>English</strong> | <a href="README_zh.md">中文</a>
+</p>
+
 <h1>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h1>
 
 <p align="center">
