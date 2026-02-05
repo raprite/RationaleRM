@@ -4,9 +4,7 @@
   <a href="./README.md">English</a> | <strong>中文</strong>
 </p>
 
-# 🧠 RationaleRM
-
-<h2>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h2>
+# Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models
 
 <p align="center">
   <a href="https://arxiv.org/abs/2602.04649"><img src="https://img.shields.io/badge/arXiv-2602.04649-b31b1b.svg" alt="arXiv"></a>
@@ -21,7 +19,7 @@
 </p>
 
 <p align="center">
-  <img src="overall_compare.png" alt="Outcome Accuracy vs Rationale Consistency" width="70%">
+  <img src="images/overall_compare.png" alt="Outcome Accuracy vs Rationale Consistency" width="70%">
 </p>
 
 <p align="center"><em>结果准确率 vs 理由一致性：理由一致性能够有效区分前沿模型并检测欺骗性对齐</em></p>
@@ -40,7 +38,7 @@
 **核心贡献：**
 
 - 🔍 **MetaJudge 框架**：将人类理由分解为原子单元，使用 LLM 进行严格的一对一语义匹配
-- 📊 **理由一致性指标**：比结果准确率更能区分前沿模型（如 GPT-5 vs Gemini 3 Pro）
+- 📊 **理由一致性指标**：能够有效发现欺骗性对齐，并区分前沿模型（如 GPT-5 vs Gemini 3 Pro）
 - 🛠️ **混合奖励训练**：结合理由奖励（Average Precision）和结果奖励，防止"理由退化"
 - 🏆 **SOTA 性能**：在 RM-Bench（87.1%）和 JudgeBench（82.0%）上取得最佳结果
 
@@ -65,7 +63,7 @@
 ## 📉 训练发现：仅结果监督导致理由退化
 
 <p align="center">
-  <img src="reward_compare.png" alt="Training Dynamics" width="70%">
+  <img src="images/reward_compare.png" alt="Training Dynamics" width="70%">
 </p>
 
 <p align="center"><em>训练动态对比：结果奖励相近，但理由奖励差异显著</em></p>
@@ -76,36 +74,6 @@
 - **右图**：理由奖励（Rationale Reward）出现显著分化——没有理由一致性约束时，模型的理由奖励持续下降，最终比我们的方法低约 **24.2%**
 
 这揭示了**理由退化（Rationale Degeneration）**现象：当中间判断过程不被激励时，模型会放弃高成本的证据核查，转而依赖更廉价的表面线索来达成相似的结果奖励。
-
----
-
-## 🔬 MetaJudge 方法
-
-MetaJudge 框架用于测量 LLM 判断过程与人类推理的一致性，包含以下三个核心步骤：
-
-### 1. 原子理由分解
-
-我们基于 HelpSteer3 数据集构建原子理由基准。对于每个样本，使用 LLM 将自由形式的人类理由分解为原子理由列表，遵循两个原则：
-
-- 保留具体的、有证据支撑的理由，过滤泛泛的主观陈述
-- 去除冗余，使每个条目形成独立的语义单元
-
-### 2. LLM 语义匹配
-
-使用 LLM 对人类原子理由 $R_h$ 和模型生成的原子理由 $R_{ai}$ 进行细粒度语义匹配。对于每个人类理由 $r_i$，匹配器给出一个 $[0,1]$ 的分数：
-
-- **1**：完全匹配，关键条件/证据一致
-- **0**：缺失、矛盾或仅以泛化方式陈述
-
-### 3. 理由一致性计算
-
-为防止模型通过生成一个宽泛理由同时匹配多个人类理由来作弊，我们采用严格的**一对一匹配约束**：
-
-$$
-\text{RC} = \frac{1}{N}\sum_{k=1}^{N}\frac{S_{\text{total}}^{(k)}}{|R_h^{(k)}|}
-$$
-
-其中 $S_{\text{total}}$ 是最优匹配得分，$|R_h|$ 是人类理由数量。
 
 ---
 
@@ -141,16 +109,20 @@ $$
 ### 项目结构
 
 ```
-MetaJudge/
+RationaleRM/
 ├── metajudge_infer.py              # 语义匹配推理脚本
 ├── metajudge_infer.sh              # 运行推理的 Shell 脚本
 ├── metajudge_analysis.py           # 计算指标的分析脚本
-├── helpsteer3_test_1000.jsonl      # 测试集：1000 条样本，包含 o3/o3-mini 的 checklist
-├── helpsteer3_human_checklist.jsonl # HelpSteer3 全集（22,116 条样本），包含人类 checklist
+├── images/                         # 图片
+│   ├── overall_compare.png
+│   └── reward_compare.png
+├── data/                           # 数据集
+│   ├── helpsteer3_test_1000.jsonl      # 测试集：1000 条样本
+│   └── helpsteer3_human_checklist.jsonl # 全集（22,116 条样本）
 └── example_data/                   # 测试用示例数据
-    ├── infer_input_10samples.jsonl # 10 条推理输入样本
-    ├── model-low_deceptive_alignment.jsonl   # 低欺骗性对齐模型推理输出
-    └── model-high_deceptive_alignment.jsonl  # 高欺骗性对齐模型推理输出
+    ├── infer_input_10samples.jsonl
+    ├── model-low_deceptive_alignment.jsonl
+    └── model-high_deceptive_alignment.jsonl
 ```
 
 ### 第一步：准备数据
@@ -188,7 +160,7 @@ export OPENAI_BASE_URL="https://api.openai.com/v1"  # 可选，默认为 OpenAI
 
 # 运行推理
 python metajudge_infer.py \
-    --input-file helpsteer3_test_1000.jsonl \
+    --input-file data/helpsteer3_test_1000.jsonl \
     --output-file output/results.jsonl \
     --model gpt-4o \
     --model-be-evaluated model-low_deceptive_alignment \

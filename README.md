@@ -1,12 +1,38 @@
+---
+license: cc-by-4.0
+task_categories:
+  - text-classification
+  - question-answering
+language:
+  - en
+tags:
+  - reward-model
+  - llm-as-judge
+  - rationale-consistency
+  - metajudge
+pretty_name: RationaleRM
+size_categories:
+  - 10K<n<100K
+configs:
+  - config_name: full
+    data_files:
+      - split: train
+        path: data/helpsteer3_human_checklist.jsonl
+    description: "Full HelpSteer3 dataset with human checklists (22,116 samples)"
+  - config_name: test
+    data_files:
+      - split: test
+        path: data/helpsteer3_test_1000.jsonl
+    description: "Test set with model checklists (1,000 samples)"
+---
+
 <div align="center">
 
 <p align="right">
   <strong>English</strong> | <a href="./README_zh.md">中文</a>
 </p>
 
-# 🧠 RationaleRM
-
-<h2>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h2>
+# Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models
 
 <p align="center">
   <a href="https://arxiv.org/abs/2602.04649"><img src="https://img.shields.io/badge/arXiv-2602.04649-b31b1b.svg" alt="arXiv"></a>
@@ -21,7 +47,7 @@
 </p>
 
 <p align="center">
-  <img src="overall_compare.png" alt="Outcome Accuracy vs Rationale Consistency" width="70%">
+  <img src="images/overall_compare.png" alt="Outcome Accuracy vs Rationale Consistency" width="70%">
 </p>
 
 <p align="center"><em>Outcome Accuracy vs Rationale Consistency: Rationale Consistency effectively distinguishes frontier models and detects deceptive alignment</em></p>
@@ -40,7 +66,7 @@ To address this, we propose the **Rationale Consistency** metric, which measures
 **Core Contributions:**
 
 - 🔍 **MetaJudge Framework**: Decomposes human rationales into atomic units and uses LLMs for strict one-to-one semantic matching
-- 📊 **Rationale Consistency Metric**: Better distinguishes frontier models than outcome accuracy (e.g., GPT-5 vs Gemini 3 Pro)
+- 📊 **Rationale Consistency Metric**: Effectively detects deceptive alignment and distinguishes frontier models (e.g., GPT-5 vs Gemini 3 Pro)
 - 🛠️ **Hybrid Reward Training**: Combines rationale reward (Average Precision) and outcome reward to prevent "rationale degeneration"
 - 🏆 **SOTA Performance**: Achieves best results on RM-Bench (87.1%) and JudgeBench (82.0%)
 
@@ -65,7 +91,7 @@ The most typical example is the comparison between **o3 and o3-mini**: both have
 ## 📉 Training Finding: Outcome-Only Supervision Leads to Rationale Degeneration
 
 <p align="center">
-  <img src="reward_compare.png" alt="Training Dynamics" width="70%">
+  <img src="images/reward_compare.png" alt="Training Dynamics" width="70%">
 </p>
 
 <p align="center"><em>Training dynamics comparison: Similar outcome rewards, but significantly different rationale rewards</em></p>
@@ -76,36 +102,6 @@ The figure above shows a key finding during training: **outcome-only supervision
 - **Right**: Rationale rewards show significant divergence — without rationale consistency constraints, model rationale rewards continuously decline, ultimately **24.2%** lower than our method
 
 This reveals the **Rationale Degeneration** phenomenon: when intermediate reasoning processes are not incentivized, models abandon high-cost evidence verification and instead rely on cheaper surface cues to achieve similar outcome rewards.
-
----
-
-## 🔬 MetaJudge Method
-
-The MetaJudge framework measures the consistency between LLM judgment processes and human reasoning, comprising three core steps:
-
-### 1. Atomic Rationale Decomposition
-
-We construct an atomic rationale benchmark based on the HelpSteer3 dataset. For each sample, we use an LLM to decompose free-form human rationales into atomic rationale lists, following two principles:
-
-- Retain specific, evidence-supported rationales; filter vague subjective statements
-- Remove redundancy so each entry forms an independent semantic unit
-
-### 2. LLM Semantic Matching
-
-Use an LLM to perform fine-grained semantic matching between human atomic rationales $R_h$ and model-generated atomic rationales $R_{ai}$. For each human rationale $r_i$, the matcher assigns a score in $[0,1]$:
-
-- **1**: Complete match, key conditions/evidence align
-- **0**: Missing, contradictory, or stated only in a generalized manner
-
-### 3. Rationale Consistency Calculation
-
-To prevent models from cheating by generating one broad rationale that matches multiple human rationales, we enforce a strict **one-to-one matching constraint**:
-
-$$
-\text{RC} = \frac{1}{N}\sum_{k=1}^{N}\frac{S_{\text{total}}^{(k)}}{|R_h^{(k)}|}
-$$
-
-Where $S_{\text{total}}$ is the optimal matching score and $|R_h|$ is the number of human rationales.
 
 ---
 
@@ -141,16 +137,20 @@ We evaluate on two challenging benchmarks:
 ### Project Structure
 
 ```
-MetaJudge/
+RationaleRM/
 ├── metajudge_infer.py              # Semantic matching inference script
 ├── metajudge_infer.sh              # Shell script for running inference
 ├── metajudge_analysis.py           # Analysis script for computing metrics
-├── helpsteer3_test_1000.jsonl      # Test set: 1000 samples with o3/o3-mini checklists
-├── helpsteer3_human_checklist.jsonl # Full HelpSteer3 dataset (22,116 samples) with human checklists
+├── images/                         # Images
+│   ├── overall_compare.png
+│   └── reward_compare.png
+├── data/                           # Datasets
+│   ├── helpsteer3_test_1000.jsonl      # Test set: 1000 samples
+│   └── helpsteer3_human_checklist.jsonl # Full dataset (22,116 samples)
 └── example_data/                   # Example data for testing
-    ├── infer_input_10samples.jsonl # 10 sample inputs for inference
-    ├── low_deceptive_alignment_infer_output.jsonl   # Low deceptive alignment model inference output
-    └── high_deceptive_alignment_infer_output.jsonl  # High deceptive alignment model inference output
+    ├── infer_input_10samples.jsonl
+    ├── model-low_deceptive_alignment.jsonl
+    └── model-high_deceptive_alignment.jsonl
 ```
 
 ### Step 1: Prepare Data
@@ -188,7 +188,7 @@ export OPENAI_BASE_URL="https://api.openai.com/v1"  # Optional, defaults to Open
 
 # Run inference
 python metajudge_infer.py \
-    --input-file helpsteer3_test_1000.jsonl \
+    --input-file data/helpsteer3_test_1000.jsonl \
     --output-file output/results.jsonl \
     --model gpt-4o \
     --model-be-evaluated model-low_deceptive_alignment \
