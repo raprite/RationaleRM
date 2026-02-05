@@ -14,16 +14,12 @@ pretty_name: RationaleRM
 size_categories:
   - 10K<n<100K
 configs:
-  - config_name: full
+  - config_name: default
     data_files:
-      - split: train
+      - split: full
         path: data/helpsteer3_human_checklist.jsonl
-    description: "Full HelpSteer3 dataset with human checklists (22,116 samples)"
-  - config_name: test
-    data_files:
       - split: test
         path: data/helpsteer3_test_1000.jsonl
-    description: "Test set with model checklists (1,000 samples)"
 ---
 
 <div align="center">
@@ -42,8 +38,8 @@ configs:
 
 <p align="center">
   <a href="https://arxiv.org/abs/2602.04649"><strong>[📄 Paper]</strong></a> •
-  <a href="#-dataset"><strong>[🤗 Dataset]</strong></a> •
-  <a href="#-citation"><strong>[📜 Citation]</strong></a>
+  <a href="#dataset"><strong>[🤗 Dataset]</strong></a> •
+  <a href="#citation"><strong>[📜 Citation]</strong></a>
 </p>
 
 <p align="center">
@@ -255,6 +251,8 @@ MetaJudge computes the following metrics:
 
 ---
 
+<a id="dataset"></a>
+
 ## 📂 Dataset
 
 We provide two datasets:
@@ -282,6 +280,8 @@ We provide two datasets:
 > - The `model-high_deceptive_alignment` and `model-low_deceptive_alignment` data are provided for testing/evaluation purposes only and were not used for training.
 
 ---
+
+<a id="citation"></a>
 
 ## 📜 Citation
 

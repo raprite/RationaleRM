@@ -14,8 +14,8 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/2602.04649"><strong>[📄 论文]</strong></a> •
-  <a href="#-数据集"><strong>[🤗 数据集]</strong></a> •
-  <a href="#-引用"><strong>[📜 引用]</strong></a>
+  <a href="#dataset-zh"><strong>[🤗 数据集]</strong></a> •
+  <a href="#citation-zh"><strong>[📜 引用]</strong></a>
 </p>
 
 <p align="center">
@@ -227,6 +227,8 @@ MetaJudge 计算以下指标：
 
 ---
 
+<a id="dataset-zh"></a>
+
 ## 📂 数据集
 
 我们提供两个数据集：
@@ -254,6 +256,8 @@ MetaJudge 计算以下指标：
 > - `model-high_deceptive_alignment` 和 `model-low_deceptive_alignment` 数据仅用于测试/评估，未用于训练。
 
 ---
+
+<a id="citation-zh"></a>
 
 ## 📜 引用
 
