@@ -66,7 +66,7 @@ To address this, we propose the **Rationale Consistency** metric, which measures
 **Core Contributions:**
 
 - 🔍 **MetaJudge Framework**: Decomposes human rationales into atomic units and uses LLMs for strict one-to-one semantic matching
-- 📊 **Rationale Consistency Metric**: Effectively detects deceptive alignment and distinguishes frontier models (e.g., GPT-5 vs Gemini 3 Pro)
+- 📊 **Rationale Consistency Metric**: Effectively detects deceptive alignment and distinguishes frontier models (e.g., GPT-5 or Gemini 3 Pro)
 - 🛠️ **Hybrid Reward Training**: Combines rationale reward (Average Precision) and outcome reward to prevent "rationale degeneration"
 - 🏆 **SOTA Performance**: Achieves best results on RM-Bench (87.1%) and JudgeBench (82.0%)
 
