@@ -4,7 +4,7 @@
   <a href="./README.md">English</a> | <strong>中文</strong>
 </p>
 
-# Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models
+<h1>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h1>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2602.04649"><img src="https://img.shields.io/badge/arXiv-2602.04649-b31b1b.svg" alt="arXiv"></a>
@@ -119,7 +119,7 @@ RationaleRM/
 ├── data/                           # 数据集
 │   ├── helpsteer3_test_1000.jsonl      # 测试集：1000 条样本
 │   └── helpsteer3_human_checklist.jsonl # 全集（22,116 条样本）
-└── example_data/                   # 测试用示例数据
+└── example/                   # 测试用示例数据
     ├── infer_input_10samples.jsonl
     ├── model-low_deceptive_alignment.jsonl
     └── model-high_deceptive_alignment.jsonl
@@ -190,12 +190,12 @@ API 配置（通过环境变量或命令行参数）：
 ```bash
 # 分析单个文件
 python metajudge_analysis.py \
-    --input-file example_data/model-low_deceptive_alignment.jsonl \
+    --input-file example/model-low_deceptive_alignment.jsonl \
     --model-be-evaluated model-low_deceptive_alignment
 
 # 分析目录中的所有文件
 python metajudge_analysis.py \
-    --input-dir example_data/ \
+    --input-dir example/ \
     --sort-by recall
 ```
 

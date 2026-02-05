@@ -32,7 +32,7 @@ configs:
   <strong>English</strong> | <a href="./README_zh.md">中文</a>
 </p>
 
-# Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models
+<h1>Outcome Accuracy is Not Enough:<br/> Aligning the Reasoning Process of Reward Models</h1>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2602.04649"><img src="https://img.shields.io/badge/arXiv-2602.04649-b31b1b.svg" alt="arXiv"></a>
@@ -147,7 +147,7 @@ RationaleRM/
 ├── data/                           # Datasets
 │   ├── helpsteer3_test_1000.jsonl      # Test set: 1000 samples
 │   └── helpsteer3_human_checklist.jsonl # Full dataset (22,116 samples)
-└── example_data/                   # Example data for testing
+└── example/                   # Example data for testing
     ├── infer_input_10samples.jsonl
     ├── model-low_deceptive_alignment.jsonl
     └── model-high_deceptive_alignment.jsonl
@@ -218,12 +218,12 @@ Compute Precision, Recall, F1, and Average Precision:
 ```bash
 # Analyze single file
 python metajudge_analysis.py \
-    --input-file example_data/low_deceptive_alignment_infer_output.jsonl \
+    --input-file example/low_deceptive_alignment_infer_output.jsonl \
     --model-be-evaluated model-low_deceptive_alignment
 
 # Analyze all files in a directory
 python metajudge_analysis.py \
-    --input-dir example_data/ \
+    --input-dir example/ \
     --sort-by recall
 ```
 
