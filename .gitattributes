@@ -1,2 +1,4 @@
+helpsteer3_human_checklist.jsonl filter=lfs diff=lfs merge=lfs -text
+helpsteer3_test_1000.jsonl filter=lfs diff=lfs merge=lfs -text
 *.jsonl filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
