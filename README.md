@@ -1,27 +1,3 @@
----
-license: cc-by-4.0
-task_categories:
-  - text-classification
-  - question-answering
-language:
-  - en
-tags:
-  - reward-model
-  - llm-as-judge
-  - rationale-consistency
-  - metajudge
-pretty_name: RationaleRM
-size_categories:
-  - 10K<n<100K
-configs:
-  - config_name: default
-    data_files:
-      - split: full
-        path: data/helpsteer3_human_checklist.jsonl
-      - split: test
-        path: data/helpsteer3_test_1000.jsonl
----
-
 <div align="center">
 
 <p align="right">
