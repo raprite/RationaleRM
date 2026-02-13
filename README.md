@@ -18,6 +18,12 @@
   <a href="#citation"><strong>[📜 Citation]</strong></a>
 </p>
 
+<p align="center">
+  <img src="images/overall_compare.png" alt="Outcome Accuracy vs Rationale Consistency" width="70%">
+</p>
+
+<p align="center"><em>Outcome Accuracy vs Rationale Consistency: Rationale Consistency effectively distinguishes frontier models and detects deceptive alignment</em></p>
+
 </div>
 
 
@@ -56,7 +62,16 @@ The most typical example is the comparison between **o3 and o3-mini**: both have
 
 ## 📉 Training Finding: Outcome-Only Supervision Leads to Rationale Degeneration
 
-The paper reveals a key finding during training: **outcome-only supervision leads to continuous decline in model-human reasoning process consistency**.
+<p align="center">
+  <img src="images/reward_compare.png" alt="Training Dynamics" width="70%">
+</p>
+
+<p align="center"><em>Training dynamics comparison: Similar outcome rewards, but significantly different rationale rewards</em></p>
+
+The figure above shows a key finding during training: **outcome-only supervision leads to continuous decline in model-human reasoning process consistency**.
+
+- **Left**: Both methods achieve nearly identical outcome rewards, indicating models can learn to select correct answers
+- **Right**: Rationale rewards show significant divergence — without rationale consistency constraints, model rationale rewards continuously decline, ultimately **24.2%** lower than our method
 
 This reveals the **Rationale Degeneration** phenomenon: when intermediate reasoning processes are not incentivized, models abandon high-cost evidence verification and instead rely on cheaper surface cues to achieve similar outcome rewards.
 
@@ -97,13 +112,20 @@ We evaluate on two challenging benchmarks:
 RationaleRM/
 ├── training/                       # Reward model training pipeline
 │   ├── train_reward_model.py       # Hybrid Reward training script
-│   └── README.md                   # Training specific guide
 ├── metajudge_infer.py              # Semantic matching inference script
 ├── metajudge_infer.sh              # Shell script for running inference
 ├── metajudge_analysis.py           # Analysis script for computing metrics
 ├── requirements.txt                # Project dependencies
-├── images/                         # Figures and visualizations
-└── example/                        # Example data for testing
+├── images/                         # Images
+│   ├── overall_compare.png
+│   └── reward_compare.png
+├── data/                           # Datasets
+│   ├── helpsteer3_test_1000.jsonl      # Test set: 1000 samples
+│   └── helpsteer3_human_checklist.jsonl # Full dataset (22,116 samples)
+└── example/                   # Example data for testing
+    ├── infer_input_10samples.jsonl
+    ├── model-low_deceptive_alignment.jsonl
+    └── model-high_deceptive_alignment.jsonl
 ```
 
 ### Step 1: Prepare Data

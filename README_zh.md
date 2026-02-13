@@ -110,9 +110,12 @@
 
 ```
 RationaleRM/
+├── training/                       # 奖励模型训练流水线
+│   ├── train_reward_model.py       # 混合奖励训练脚本
 ├── metajudge_infer.py              # 语义匹配推理脚本
 ├── metajudge_infer.sh              # 运行推理的 Shell 脚本
 ├── metajudge_analysis.py           # 计算指标的分析脚本
+├── requirements.txt                # 项目依赖
 ├── images/                         # 图片
 │   ├── overall_compare.png
 │   └── reward_compare.png
@@ -197,6 +200,20 @@ python metajudge_analysis.py \
 python metajudge_analysis.py \
     --input-dir example/ \
     --sort-by recall
+
+### 第四步：混合奖励训练
+
+使用混合损失方法训练您自己的生成式奖励模型 (GenRM)：
+
+```bash
+python training/train_reward_model.py \
+    --model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --dataset_name "Qwen/RationaleRM" \
+    --output_dir "./output/rm_training" \
+    --batch_size 4 \
+    --epochs 1 \
+    --rationale_weight 0.1
+```
 ```
 
 输出示例：
