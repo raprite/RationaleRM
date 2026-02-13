@@ -107,7 +107,7 @@ We evaluate on two challenging benchmarks:
 ```
 RationaleRM/
 ├── training/                       # Reward model training pipeline
-│   ├── train_reward_model.py       # Hybrid Reward training script
+│   └── train_reward_model.py       # Hybrid Reward training script
 ├── metajudge_infer.py              # Semantic matching inference script
 ├── metajudge_infer.sh              # Shell script for running inference
 ├── metajudge_analysis.py           # Analysis script for computing metrics

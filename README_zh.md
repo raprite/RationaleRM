@@ -107,7 +107,7 @@
 ```
 RationaleRM/
 ├── training/                       # 奖励模型训练流水线
-│   ├── train_reward_model.py       # 混合奖励训练脚本
+│   └── train_reward_model.py       # 混合奖励训练脚本
 ├── metajudge_infer.py              # 语义匹配推理脚本
 ├── metajudge_infer.sh              # 运行推理的 Shell 脚本
 ├── metajudge_analysis.py           # 计算指标的分析脚本
@@ -209,7 +209,6 @@ python training/train_reward_model.py \
     --batch_size 4 \
     --epochs 1 \
     --rationale_weight 0.1
-```
 ```
 
 输出示例：
