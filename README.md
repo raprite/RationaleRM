@@ -18,11 +18,9 @@
   <a href="#citation"><strong>[📜 Citation]</strong></a>
 </p>
 
-<p align="center">
-  <img src="images/overall_compare.png" alt="Outcome Accuracy vs Rationale Consistency" width="70%">
-</p>
+![Outcome Accuracy vs Rationale Consistency](images/overall_compare.png)
 
-<p align="center"><em>Outcome Accuracy vs Rationale Consistency: Rationale Consistency effectively distinguishes frontier models and detects deceptive alignment</em></p>
+*Outcome Accuracy vs Rationale Consistency: Rationale Consistency effectively distinguishes frontier models and detects deceptive alignment*
 
 </div>
 
@@ -62,11 +60,9 @@ The most typical example is the comparison between **o3 and o3-mini**: both have
 
 ## 📉 Training Finding: Outcome-Only Supervision Leads to Rationale Degeneration
 
-<p align="center">
-  <img src="images/reward_compare.png" alt="Training Dynamics" width="70%">
-</p>
+![Training Dynamics](images/reward_compare.png)
 
-<p align="center"><em>Training dynamics comparison: Similar outcome rewards, but significantly different rationale rewards</em></p>
+*Training dynamics comparison: Similar outcome rewards, but significantly different rationale rewards*
 
 The figure above shows a key finding during training: **outcome-only supervision leads to continuous decline in model-human reasoning process consistency**.
 

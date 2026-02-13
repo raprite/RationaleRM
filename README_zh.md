@@ -18,11 +18,9 @@
   <a href="#citation-zh"><strong>[📜 引用]</strong></a>
 </p>
 
-<p align="center">
-  <img src="images/overall_compare.png" alt="Outcome Accuracy vs Rationale Consistency" width="70%">
-</p>
+![结果准确率 vs 理由一致性](images/overall_compare.png)
 
-<p align="center"><em>结果准确率 vs 理由一致性：理由一致性能够有效区分前沿模型并检测欺骗性对齐</em></p>
+*结果准确率 vs 理由一致性：理由一致性能够有效区分前沿模型并检测欺骗性对齐*
 
 </div>
 
@@ -62,11 +60,9 @@
 
 ## 📉 训练发现：仅结果监督导致理由退化
 
-<p align="center">
-  <img src="images/reward_compare.png" alt="Training Dynamics" width="70%">
-</p>
+![训练动态对比](images/reward_compare.png)
 
-<p align="center"><em>训练动态对比：结果奖励相近，但理由奖励差异显著</em></p>
+*训练动态对比：结果奖励相近，但理由奖励差异显著*
 
 上图展示了训练过程中的关键发现：**仅结果监督会导致模型与人类判别过程的一致性持续下降**。
 
